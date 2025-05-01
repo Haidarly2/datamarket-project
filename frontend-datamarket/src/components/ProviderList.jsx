@@ -13,7 +13,7 @@ const providers = [
 
 const ProviderList = () => {
     return (
-        <Box sx={{ px: 4, py: 6, bgcolor: '#f5f9fd' }}>
+        <Box sx={{ px: 4, py: 6, bgcolor: '#ffffff' }}>
             <Typography variant="h6" fontWeight="bold" mb={1}>
                 Cari Produk Berdasarkan
             </Typography>

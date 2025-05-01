@@ -6,7 +6,7 @@ const HeroSection = () => {
     return (
         <Box
             sx={{
-                bgcolor: '#F1F5FB',
+                bgcolor: '#EFF3FA',
                 px: 4,
                 py: 8,
                 display: 'flex',
@@ -14,6 +14,7 @@ const HeroSection = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 gap: 4,
+                width: '100%',
             }}
         >
             {/* Left Section */}

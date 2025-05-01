@@ -1,14 +1,10 @@
 import React from 'react';
-import { Box, Typography, Button, InputBase, Paper, IconButton } from '@mui/material';
+import { Box, Typography, Avatar, InputBase, Paper, IconButton } from '@mui/material';
 import { SearchNormal1, MessageQuestion } from 'iconsax-reactjs';
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const NavbarCustomers = () => {
     const navigate = useNavigate();
-
-    const handleLoginClick = () => {
-        navigate('/login');
-    };
 
     return (
         <Box sx={{ bgcolor: '#EFF3FA', px: 4, py: 2, mb: 0 }}>
@@ -68,26 +64,11 @@ const Navbar = () => {
                     >
                         <MessageQuestion size="20" color="#000" />
                     </IconButton>
-                    <Button
-                        variant="contained"
-                        onClick={handleLoginClick}
-                        sx={{
-                            borderRadius: 999,
-                            textTransform: 'none',
-                            bgcolor: 'white',
-                            color: '#000',
-                            fontWeight: 'bold',
-                            px: 3,
-                            py: 1,
-                            minWidth: 'unset',
-                        }}
-                    >
-                        Masuk
-                    </Button>
+                    <Avatar src="/avatar.png" alt="Profile" />
                 </Box>
             </Box>
         </Box>
     );
 };
 
-export default Navbar;
+export default NavbarCustomers;
