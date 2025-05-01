@@ -1,5 +1,164 @@
+// src/pages/LoginPage.jsx
+import React, { useState } from 'react';
+import {
+    Box,
+    Button,
+    TextField,
+    Typography,
+    InputAdornment,
+    IconButton,
+    Paper,
+} from '@mui/material';
+import { Message, Lock, Eye, EyeSlash } from 'iconsax-reactjs';
+import { useNavigate } from 'react-router-dom';
+
 const LoginPage = () => {
-    return <h1>Login Page</h1>;
+    const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
+    const togglePassword = () => setShowPassword((prev) => !prev);
+
+    const handleLogin = () => {
+        // Validasi sederhana
+        if (email === 'admin@datamart.com' && password === '123456') {
+            navigate('/customers');
+        } else {
+            alert('Email atau password salah');
+        }
+    };
+
+    return (
+        <Box
+            sx={{
+                minHeight: '100vh',
+                bgcolor: '#f1f5fb',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                p: 2,
+            }}
+        >
+            <Paper
+                elevation={0}
+                sx={{
+                    width: 400,
+                    px: 4,
+                    py: 5,
+                    borderRadius: 3,
+                    textAlign: 'center',
+                }}
+            >
+                {/* Logo */}
+                {/* <Box mb={3}>
+                    <img src="/logo-datamart.png" alt="DataMart" width={100} />
+                </Box> */}
+                <Box display="flex" alignItems="center">
+                    <img src="/logo-datamart.png" alt="DataMart" height={28} style={{ marginRight: 8 }} />
+                    <Typography variant="h6" fontWeight="bold" color="white">
+                        DataMart
+                    </Typography>
+                </Box>
+
+
+
+                {/* Title */}
+                <Typography variant="h6" fontWeight="bold" textAlign="left" mb={2}>
+                    Masuk
+                </Typography>
+
+                {/* Email Input */}
+                <TextField
+                    fullWidth
+                    placeholder="Masukkan email"
+                    variant="outlined"
+                    margin="normal"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Message size="20" />
+                            </InputAdornment>
+                        ),
+                        sx: { borderRadius: '999px', bgcolor: 'white' },
+                    }}
+                />
+
+                {/* Password Input */}
+                <TextField
+                    fullWidth
+                    placeholder="Masukkan password"
+                    type={showPassword ? 'text' : 'password'}
+                    variant="outlined"
+                    margin="normal"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Lock size="20" />
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton onClick={togglePassword} edge="end">
+                                    {showPassword ? <EyeSlash size="20" /> : <Eye size="20" />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                        sx: { borderRadius: '999px', bgcolor: 'white' },
+                    }}
+                />
+
+                {/* Lupa Password */}
+                <Typography
+                    variant="body2"
+                    sx={{ textAlign: 'right', mt: 1, mb: 3, cursor: 'pointer' }}
+                >
+                    Lupa Password
+                </Typography>
+
+                {/* Login Button */}
+                <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={handleLogin}
+                    sx={{
+                        bgcolor: '#0d5fe9',
+                        borderRadius: '999px',
+                        py: 1.5,
+                        fontWeight: 'bold',
+                        mb: 2,
+                        textTransform: 'none',
+                        fontSize: '16px',
+                        '&:hover': {
+                            bgcolor: '#0b4fcc',
+                        },
+                    }}
+                >
+                    Masuk
+                </Button>
+
+                {/* Register Button */}
+                <Button
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                        borderRadius: '999px',
+                        py: 1.5,
+                        textTransform: 'none',
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        borderColor: '#d9d9d9',
+                    }}
+                >
+                    Daftar
+                </Button>
+            </Paper>
+        </Box>
+    );
 };
 
 export default LoginPage;
