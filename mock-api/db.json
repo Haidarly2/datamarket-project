@@ -1,5 +1,124 @@
 {
-    "customers": [],
-    "transactions": [],
-    "packages": []
+    "packages": [
+        {
+            "id": 1,
+            "name": "Paket Super Seru 25 GB",
+            "provider": "Telkomsel",
+            "quota": "Kuota 25 GB",
+            "price": "Rp 24.000.000",
+            "expiration": "28 Hari"
+        },
+        {
+            "id": 2,
+            "name": "Paket Xtra Combo Flex M",
+            "provider": "XL Axiata",
+            "quota": "Kuota 25 GB",
+            "price": "Rp 24.000.000",
+            "expiration": "28 Hari"
+        },
+        {
+            "id": 3,
+            "name": "Paket Super Seru 50 GB",
+            "provider": "Telkomsel",
+            "quota": "Kuota 50 GB",
+            "price": "Rp 24.000.000",
+            "expiration": "28 Hari"
+        }
+    ],
+    "providers": [
+        {
+            "id": 1,
+            "name": "Telkomsel",
+            "logo": "/providers/telkomsel.png"
+        },
+        {
+            "id": 2,
+            "name": "Indosat Ooredoo",
+            "logo": "/providers/indosat.png"
+        },
+        {
+            "id": 3,
+            "name": "Smartfren",
+            "logo": "/providers/smartfren.png"
+        },
+        {
+            "id": 4,
+            "name": "Tri",
+            "logo": "/providers/tri.png"
+        },
+        {
+            "id": 5,
+            "name": "by.U",
+            "logo": "/providers/byu.png"
+        },
+        {
+            "id": 6,
+            "name": "AXIS",
+            "logo": "/providers/axis.png"
+        },
+        {
+            "id": 7,
+            "name": "XL Axiata",
+            "logo": "/providers/xlaxiata.png"
+        }
+    ],
+    "addons": [
+        {
+            "id": 1,
+            "name": "Telepon",
+            "duration": "28 Hari",
+            "detail": "38500 Menit",
+            "harga": "Rp 10.000"
+        },
+        {
+            "id": 2,
+            "name": "Disney+",
+            "duration": "28 Hari",
+            "detail": "3 GB",
+            "harga": "Rp 10.000"
+        },
+        {
+            "id": 3,
+            "name": "Whatsapp",
+            "duration": "28 Hari",
+            "detail": "2 GB",
+            "harga": "Rp 10.000"
+        },
+        {
+            "id": 4,
+            "name": "Spotify",
+            "duration": "28 Hari",
+            "detail": "3 GB",
+            "harga": "Rp 10.000"
+        },
+        {
+            "id": 5,
+            "name": "Facebook",
+            "duration": "28 Hari",
+            "detail": "2 GB",
+            "harga": "Rp 10.000"
+        }
+    ],
+    "paymentMethods": [
+        {
+            "id": 1,
+            "name": "Gopay",
+            "logo": "/finances/gopay.png"
+        },
+        {
+            "id": 2,
+            "name": "Dana",
+            "logo": "/finances/dana.png"
+        },
+        {
+            "id": 3,
+            "name": "ShopeePay",
+            "logo": "/finances/shopeepay.png"
+        },
+        {
+            "id": 4,
+            "name": "OVO",
+            "logo": "/finances/ovo.png"
+        }
+    ]
 }
