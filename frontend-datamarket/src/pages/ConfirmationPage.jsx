@@ -7,53 +7,84 @@ import {
 } from '@mui/material';
 import NavbarTransaction from "../components/NavbarTransaction";
 import { useNavigate } from 'react-router-dom';
+import { useCheckout } from '../context/CheckoutContext'; // Pastikan path ini sesuai
+import { usePayment } from '../context/PaymentContext';   // Pastikan path ini sesuai
 
 const ConfirmationPage = () => {
     const navigate = useNavigate();
+    const {
+        phoneNumber,
+        selectedAddOns,
+        mainPackage // ✅ ambil dari context
+    } = useCheckout();
+    const { paymentPhoneNumber, selectedMethod } = usePayment();
+
+    // ✅ Fungsi untuk membersihkan harga dari string "Rp xx.xxx.xxx"
+    const getCleanPrice = (priceString) => {
+        if (typeof priceString === 'number') return priceString;
+        return Number(priceString.replace(/[^\d]/g, '')) || 0;
+    };
+
+    // ✅ Total dihitung dari mainPackage + add-ons
+    const calculateTotal = () => {
+        const addOnsTotal = selectedAddOns.reduce((sum, addOn) => sum + getCleanPrice(addOn.harga), 0);
+        const mainPrice = mainPackage ? getCleanPrice(mainPackage.price) : 0;
+        return mainPrice + addOnsTotal;
+    };
+
     return (
         <Box sx={{ bgcolor: '#fff', minHeight: '100vh' }}>
-            {/* Header */}
             <NavbarTransaction
                 title="Konfirmasi Pembelian"
                 onBack={() => navigate(-1)}
             />
 
-            {/* Ringkasan */}
             <Box sx={{ maxWidth: 600, mx: 'auto', mt: 6, px: 4 }}>
                 <Typography fontWeight={600} fontSize="16px" mb={2}>
                     Ringkasan
                 </Typography>
                 <Divider sx={{ mb: 2 }} />
 
-                {/* Paket */}
+                {/* Paket Utama */}
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography>Super Seru 25 GB</Typography>
-                    <Typography fontWeight={500}>Rp 50.000</Typography>
+                    <Typography>{mainPackage?.name || '-'}</Typography>
+                    <Typography fontWeight={500}>
+                        Rp {mainPackage ? getCleanPrice(mainPackage.price).toLocaleString() : '-'}
+                    </Typography>
                 </Box>
 
                 {/* Add-ons */}
-                <Typography sx={{ mt: 2 }}>Add-ons</Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography>Spotify 3 GB</Typography>
-                    <Typography fontWeight={500}>Rp 35.000</Typography>
-                </Box>
+                {selectedAddOns.length > 0 && (
+                    <>
+                        <Typography sx={{ mt: 2 }}>Add-ons</Typography>
+                        {selectedAddOns.map((addOn, index) => (
+                            <Box key={index} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                <Typography>{addOn.name}</Typography>
+                                <Typography fontWeight={500}>
+                                    Rp {getCleanPrice(addOn.harga).toLocaleString()}
+                                </Typography>
+                            </Box>
+                        ))}
+                    </>
+                )}
 
                 {/* Metode Bayar */}
                 <Typography sx={{ mt: 3 }}>Metode Bayar</Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography fontWeight={600}>Gopay</Typography>
-                    <Typography>0821xxxxxxxx</Typography>
+                    <Typography fontWeight={600}>{selectedMethod || '-'}</Typography>
+                    <Typography>{paymentPhoneNumber || '-'}</Typography>
                 </Box>
 
                 {/* Total */}
                 <Divider sx={{ mt: 2, mb: 1 }} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
                     <Typography fontWeight={600}>Total</Typography>
-                    <Typography fontWeight={600}>Rp 85.000</Typography>
+                    <Typography fontWeight={600}>
+                        Rp {calculateTotal().toLocaleString()}
+                    </Typography>
                 </Box>
             </Box>
 
-            {/* Tombol Bayar */}
             <Box sx={{ px: 3, mt: 6, mb: 3 }}>
                 <Button
                     variant="contained"
