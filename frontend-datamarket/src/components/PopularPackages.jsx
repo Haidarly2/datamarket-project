@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Grid, Paper, Button } from '@mui/material';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useCheckout } from "../context/CheckoutContext";
 
 const packages = [
     {
@@ -8,24 +9,28 @@ const packages = [
         provider: 'Telkomsel',
         quota: 'Kuota 25 GB',
         price: 'Rp 24.000.000',
+        expiration: '28 Hari',
     },
     {
         name: 'Paket Xtra Combo Flex M',
         provider: 'XL Axiata',
         quota: 'Kuota 25 GB',
         price: 'Rp 24.000.000',
+        expiration: '28 Hari',
     },
     {
         name: 'Paket Super Seru 50 GB',
         provider: 'Telkomsel',
         quota: 'Kuota 50 GB',
         price: 'Rp 24.000.000',
+        expiration: '28 Hari',
     },
     {
         name: 'Paket Xtra Combo Flex M',
         provider: 'XL Axiata',
         quota: 'Kuota 25 GB',
         price: 'Rp 24.000.000',
+        expiration: '28 Hari',
     },
     // {
     //     name: 'Paket Kaget',
@@ -36,6 +41,14 @@ const packages = [
 ];
 
 const PopularPackages = () => {
+    const navigate = useNavigate();
+    const { setMainPackage } = useCheckout(); // ambil dari context
+
+    const handleBuy = (pkg) => {
+        setMainPackage(pkg);      // simpan paket ke context
+        navigate('/checkout');    // arahkan ke halaman checkout
+    };
+
     return (
         <Box sx={{ px: 4, py: 6, bgcolor: '#ffffff' }}>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
@@ -89,8 +102,7 @@ const PopularPackages = () => {
                                 </Typography>
                             </Box>
                             <Button
-                                component={Link}
-                                to="/checkout"
+                                onClick={() => handleBuy(pkg)} // panggil fungsi handleBuy saat tombol diklik
                                 variant="contained"
                                 fullWidth
                                 sx={{
