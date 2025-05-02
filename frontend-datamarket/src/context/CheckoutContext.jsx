@@ -10,12 +10,15 @@ export const useCheckout = () => useContext(CheckoutContext);
 export const CheckoutProvider = ({ children }) => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedAddOns, setSelectedAddOns] = useState([]);
+    const [mainPackage, setMainPackage] = useState(null);
 
     const value = {
         phoneNumber,
         setPhoneNumber,
         selectedAddOns,
         setSelectedAddOns,
+        mainPackage,
+        setMainPackage,
     };
 
     return (
