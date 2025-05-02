@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     Box,
-    Typography, 
+    Typography,
     List,
     ListItem,
     ListItemAvatar,
@@ -16,6 +16,7 @@ import {
     ArrowDown2,
 } from 'iconsax-reactjs';
 import NavbarTransaction from "../components/NavbarTransaction";
+import { usePayment } from "../context/PaymentContext";
 import { useNavigate } from 'react-router-dom';
 
 const paymentMethods = [
@@ -28,20 +29,59 @@ const paymentMethods = [
 const PaymentMethodPage = () => {
     const navigate = useNavigate();
     const [openIndex, setOpenIndex] = useState(null);
+    const [inputValues, setInputValues] = useState({});
+    const [, setErrors] = useState({}); // ✅ Tambahkan ini
+    const [inputErrors, setInputErrors] = useState({});
+
+    const {
+        setPaymentPhoneNumber,
+        setSelectedMethod,
+    } = usePayment();
 
     const handleToggle = (index) => {
         setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
+        setErrors({}); // Reset error saat mengganti metode
     };
+
+    const handleInputChange = (method, value) => {
+        setInputValues((prev) => ({ ...prev, [method]: value }));
+        if (value.trim()) {
+            setErrors((prev) => ({ ...prev, [method]: '' })); // Hapus error kalau sudah ada input
+        }
+    };
+
+    const handleContinue = () => {
+        const selected = paymentMethods[openIndex];
+        const methodName = selected?.name;
+        const phone = inputValues[methodName] || '';
+
+        if (!phone.trim()) {
+            setInputErrors((prev) => ({
+                ...prev,
+                [methodName]: 'Nomor HP harus diisi.',
+            }));
+            return;
+        }
+
+        // Reset error jika valid
+        setInputErrors((prev) => ({
+            ...prev,
+            [methodName]: '',
+        }));
+
+        setPaymentPhoneNumber(phone);
+        setSelectedMethod(methodName);
+        navigate('/confirmation');
+    };
+
 
     return (
         <Box sx={{ bgcolor: '#fff', minHeight: '100vh' }}>
-            {/* Header */}
             <NavbarTransaction
                 title="Pilih Pembayaran"
                 onBack={() => navigate(-1)}
             />
 
-            {/* Payment Methods */}
             <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4, px: 2 }}>
                 <Typography variant="subtitle1" fontWeight={600} mb={2}>
                     E-wallet
@@ -82,13 +122,23 @@ const PaymentMethodPage = () => {
                                 />
                             </ListItem>
 
-                            {/* Collapse Input */}
                             <Collapse in={openIndex === index} timeout="auto" unmountOnExit>
                                 <Box sx={{ px: 3, pb: 2 }}>
                                     <TextField
                                         fullWidth
                                         placeholder={`Masukkan nomor ${item.name}`}
                                         variant="outlined"
+                                        value={inputValues[item.name] || ''}
+                                        onChange={(e) => {
+                                            handleInputChange(item.name, e.target.value);
+                                            // Reset error saat pengguna mulai mengetik
+                                            setInputErrors((prev) => ({
+                                                ...prev,
+                                                [item.name]: '',
+                                            }));
+                                        }}
+                                        error={!!inputErrors[item.name]}
+                                        helperText={inputErrors[item.name]}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: 999,
@@ -96,6 +146,7 @@ const PaymentMethodPage = () => {
                                             },
                                         }}
                                     />
+
                                 </Box>
                             </Collapse>
 
@@ -107,11 +158,11 @@ const PaymentMethodPage = () => {
                 </List>
             </Box>
 
-            {/* Bottom Button */}
             <Box sx={{ position: 'fixed', bottom: 20, left: 0, right: 0, px: 2 }}>
                 <Button
                     variant="contained"
                     fullWidth
+                    onClick={handleContinue}
                     sx={{
                         bgcolor: '#0B63E5',
                         color: '#fff',
