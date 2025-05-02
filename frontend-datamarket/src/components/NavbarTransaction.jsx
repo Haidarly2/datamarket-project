@@ -1,7 +1,7 @@
 import { ArrowLeft } from 'iconsax-reactjs';
 import { Box, Avatar, IconButton, Typography } from '@mui/material';
 
-const CheckoutNavbar = ({ onBack }) => {
+const NavbarTransaction = ({ title = "Judul Halaman", onBack }) => {
     return (
         <Box
             sx={{
@@ -27,7 +27,7 @@ const CheckoutNavbar = ({ onBack }) => {
 
             {/* Tengah: Judul */}
             <Typography fontWeight="600" fontSize="16px">
-                Pembelian Paket
+                {title}
             </Typography>
 
             {/* Kanan: Icon dan Avatar */}
@@ -49,4 +49,4 @@ const CheckoutNavbar = ({ onBack }) => {
     );
 };
 
-export default CheckoutNavbar;
+export default NavbarTransaction;
