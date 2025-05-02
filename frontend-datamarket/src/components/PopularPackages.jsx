@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Grid, Paper, Button } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const packages = [
     {
@@ -88,6 +89,8 @@ const PopularPackages = () => {
                                 </Typography>
                             </Box>
                             <Button
+                                component={Link}
+                                to="/checkout"
                                 variant="contained"
                                 fullWidth
                                 sx={{
