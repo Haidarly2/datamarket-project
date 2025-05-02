@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Box,
     Typography,
@@ -27,17 +27,31 @@ const addOns = [
 ];
 
 const CheckoutFormPage = () => {
-    const { phoneNumber, setPhoneNumber, selectedAddOns, setSelectedAddOns } = useCheckout();
-    const [error, setError] = useState("");
+    const {
+        phoneNumber,
+        setPhoneNumber,
+        selectedAddOns,
+        setSelectedAddOns,
+        mainPackage
+    } = useCheckout();
 
+    useEffect(() => {
+        setPhoneNumber("");         // reset nomor hp
+        setSelectedAddOns([]);      // reset add-ons
+    }, []);
+
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleToggleAddOn = (name) => {
-        setSelectedAddOns((prev) =>
-            prev.includes(name)
-                ? prev.filter((item) => item !== name)
-                : [...prev, name]
-        );
+    const handleToggleAddOn = (item) => {
+        setSelectedAddOns((prev) => {
+            const exists = prev.find((addOn) => addOn.name === item.name);
+            if (exists) {
+                return prev.filter((addOn) => addOn.name !== item.name);
+            } else {
+                return [...prev, item];
+            }
+        });
     };
 
     const handleContinue = () => {
@@ -60,20 +74,26 @@ const CheckoutFormPage = () => {
             {/* Paket Title */}
             <Box textAlign="center" mb={3}>
                 <Typography variant="h5" fontWeight="bold">
-                    Super Seru 25 GB
+                    {mainPackage?.name || "Nama Paket"}
                 </Typography>
                 <Stack direction="row" justifyContent="center" spacing={4} mt={2}>
                     <Stack direction="row" alignItems="center" gap={1}>
                         <Star size="20" variant="Bold" color="#1976d2" />
-                        <Typography>Kuota 25 GB</Typography>
+                        <Typography>
+                            {mainPackage?.quota || "-"}
+                        </Typography>
                     </Stack>
                     <Stack direction="row" alignItems="center" gap={1}>
                         <Calendar size="20" variant="Bold" color="#1976d2" />
-                        <Typography>Masa Aktif 28 Hari</Typography>
+                        <Typography>
+                            {mainPackage?.expiration || "-"}
+                        </Typography>
                     </Stack>
                     <Stack direction="row" alignItems="center" gap={1}>
                         <DollarCircle size="20" variant="Bold" color="#1976d2" />
-                        <Typography>Rp 50.000</Typography>
+                        <Typography>
+                            {mainPackage?.price || "-"}
+                        </Typography>
                     </Stack>
                 </Stack>
             </Box>
@@ -105,7 +125,7 @@ const CheckoutFormPage = () => {
                 </Typography>
                 <Box sx={{ display: "flex", overflowX: "auto", gap: 2, pb: 1 }}>
                     {addOns.map((item, idx) => {
-                        const isSelected = selectedAddOns.includes(item.name);
+                        const isSelected = selectedAddOns.some((addOn) => addOn.name === item.name);
                         return (
                             <Card
                                 key={idx}
@@ -128,7 +148,7 @@ const CheckoutFormPage = () => {
                                         color={isSelected ? "success" : "primary"}
                                         fullWidth
                                         sx={{ borderRadius: 999 }}
-                                        onClick={() => handleToggleAddOn(item.name)}
+                                        onClick={() => handleToggleAddOn(item)}
                                     >
                                         {isSelected ? "✓ Ditambahkan" : "Tambah"}
                                     </Button>
