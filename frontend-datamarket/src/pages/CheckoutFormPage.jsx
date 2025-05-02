@@ -14,7 +14,7 @@ import {
     Calendar,
     DollarCircle,
 } from "iconsax-reactjs";
-import NavbarCheckout from "../components/NavbarCheckout";
+import NavbarTransaction from "../components/NavbarTransaction";
 import { useCheckout } from "../context/CheckoutContext";
 import { useNavigate } from "react-router-dom";
 
@@ -27,8 +27,6 @@ const addOns = [
 ];
 
 const CheckoutFormPage = () => {
-    // const [phone, setPhone] = useState("");
-    // const [selectedAddOns, setSelectedAddOns] = useState([]);
     const { phoneNumber, setPhoneNumber, selectedAddOns, setSelectedAddOns } = useCheckout();
     const [error, setError] = useState("");
 
@@ -53,7 +51,11 @@ const CheckoutFormPage = () => {
 
     return (
         <Box sx={{ p: 2, maxWidth: 800, mx: "auto" }}>
-            <NavbarCheckout onBack={() => navigate(-1)} />
+            {/* Header */}
+            <NavbarTransaction
+                title="Pembelian Paket"
+                onBack={() => navigate(-1)}
+            />
 
             {/* Paket Title */}
             <Box textAlign="center" mb={3}>
@@ -153,22 +155,3 @@ const CheckoutFormPage = () => {
 };
 
 export default CheckoutFormPage;
-
-{/* <Stack direction="row" justifyContent="space-between" alignItems="center" mb={3}>
-    <Stack direction="row" alignItems="center" gap={1}>
-        <IconButton>
-            <ArrowLeft2 size="24" />
-        </IconButton>
-        <Typography variant="h6" fontWeight="bold">
-            Pembelian Paket
-        </Typography>
-    </Stack>
-    <Stack direction="row" alignItems="center" gap={2}>
-        <IconButton>
-            <Message size="24" />
-        </IconButton>
-        <IconButton>
-            <ProfileCircle size="28" variant="Bold" />
-        </IconButton>
-    </Stack>
-</Stack> */}
