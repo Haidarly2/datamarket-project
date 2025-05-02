@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Typography, Avatar, InputBase, Paper, IconButton } from '@mui/material';
 import { SearchNormal1, MessageQuestion } from 'iconsax-reactjs';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const NavbarCustomers = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     return (
         <Box sx={{ bgcolor: '#EFF3FA', px: 4, py: 2, mb: 0 }}>
