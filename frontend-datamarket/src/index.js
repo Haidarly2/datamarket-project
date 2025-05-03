@@ -5,15 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals'
 import { CheckoutProvider } from './context/CheckoutContext';
 import { PaymentProvider } from './context/PaymentContext';
+import { AuthProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CheckoutProvider>
-      <PaymentProvider>
+    <AuthProvider>
+      <CheckoutProvider>
+        <PaymentProvider>
           <App />
-      </PaymentProvider>
-    </CheckoutProvider>
+        </PaymentProvider>
+      </CheckoutProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
 
