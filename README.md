@@ -38,10 +38,13 @@ frontend-datamarket/
 ## GIF Fitur
 1. Fitur Login
 <img src="assets/1.gif">
+
 2. Fitur Lihat Paket Data
 <img src="assets/2.gif">
+
 3. Fitur Transaksi Paket Data
 <img src="assets/3.gif">
+
 4. Fitur Login (Memilih beli paket sebelum login)
 <img src="assets/4.gif">
 
