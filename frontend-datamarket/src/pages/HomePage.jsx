@@ -11,8 +11,8 @@ const HomePage = () => {
             <Navbar />
             <Container maxWidth="lg" sx={{ mt: 4 }}>
                 <HeroSection />
-                <ProviderList />
                 <PopularPackages />
+                <ProviderList />
             </Container>
         </Box>
     );
