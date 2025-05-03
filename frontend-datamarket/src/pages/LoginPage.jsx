@@ -10,24 +10,42 @@ import {
     Paper,
 } from '@mui/material';
 import { Message, Lock, Eye, EyeSlash } from 'iconsax-reactjs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useCheckout } from '../context/CheckoutContext';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const redirectPath = queryParams.get('redirect') || '/customers';
+    const { setIsLoggedIn } = useAuth();
+    const { setMainPackage } = useCheckout();
+
     const navigate = useNavigate();
 
     const togglePassword = () => setShowPassword((prev) => !prev);
 
     const handleLogin = () => {
-        // Validasi sederhana
         if (email === 'admin@datamart.com' && password === '123456') {
-            navigate('/customers');
+            localStorage.setItem('isLoggedIn', 'true');
+
+            // Ambil data paket jika ada
+            const storedPackage = localStorage.getItem('selectedPackage');
+            if (storedPackage) {
+                setMainPackage(JSON.parse(storedPackage));
+                localStorage.removeItem('selectedPackage');
+            }
+
+            setIsLoggedIn(true);
+            navigate(redirectPath);
         } else {
             alert('Email atau password salah');
         }
     };
+
 
     return (
         <Box
