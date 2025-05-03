@@ -1,10 +1,30 @@
-import React from 'react';
-import { Box, Typography, Avatar, InputBase, Paper, IconButton } from '@mui/material';
+import React, { useState } from 'react';
+import {
+    Box, Typography, Avatar, InputBase, Paper, IconButton, Menu, MenuItem
+} from '@mui/material';
 import { SearchNormal1, MessageQuestion } from 'iconsax-reactjs';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const NavbarCustomers = () => {
-    // const navigate = useNavigate();
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const navigate = useNavigate();
+    const { setIsLoggedIn } = useAuth();
+
+    const handleMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem('isLoggedIn');
+        navigate('/home');
+    };
 
     return (
         <Box sx={{ bgcolor: '#EFF3FA', px: 4, py: 2, mb: 0 }}>
@@ -51,7 +71,7 @@ const NavbarCustomers = () => {
                     </IconButton>
                 </Paper>
 
-                {/* Icon & Masuk Button */}
+                {/* Icon & Avatar */}
                 <Box display="flex" alignItems="center" gap={2}>
                     <IconButton
                         sx={{
@@ -64,7 +84,27 @@ const NavbarCustomers = () => {
                     >
                         <MessageQuestion size="20" color="#000" />
                     </IconButton>
-                    <Avatar src="/avatar.png" alt="Profile" />
+
+                    {/* Avatar with Dropdown */}
+                    <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
+                        <Avatar src="/avatar.png" alt="Profile" />
+                    </IconButton>
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleMenuClose}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                    >
+                        <MenuItem onClick={handleMenuClose}>Pengaturan</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </Menu>
                 </Box>
             </Box>
         </Box>
