@@ -21,10 +21,7 @@ const ProviderList = () => {
     return (
         <Box sx={{ px: 4, py: 6, bgcolor: '#ffffff' }}>
             <Typography variant="h6" fontWeight="bold" mb={1}>
-                Cari Produk Berdasarkan
-            </Typography>
-            <Typography variant="h6" fontWeight="bold" mb={4}>
-                Internet Provider
+                List Provider yang tersedia
             </Typography>
 
             <Grid container spacing={3}>
