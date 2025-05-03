@@ -12,6 +12,12 @@ export const CheckoutProvider = ({ children }) => {
     const [selectedAddOns, setSelectedAddOns] = useState([]);
     const [mainPackage, setMainPackage] = useState(null);
 
+    const resetCheckout = () => {
+        setPhoneNumber("");
+        setSelectedAddOns([]);
+        setMainPackage(null);
+    };
+
     const value = {
         phoneNumber,
         setPhoneNumber,
@@ -19,6 +25,7 @@ export const CheckoutProvider = ({ children }) => {
         setSelectedAddOns,
         mainPackage,
         setMainPackage,
+        resetCheckout,
     };
 
     return (
