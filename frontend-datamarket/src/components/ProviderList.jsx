@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Grid, Paper, Typography } from '@mui/material';
-
-const providers = [
-    { name: 'Telkomsel', logo: '/providers/telkomsel.png' },
-    { name: 'Indosat Ooredoo', logo: '/providers/indosat.png' },
-    { name: 'Smartfren', logo: '/providers/smartfren.png' },
-    { name: 'Tri', logo: '/providers/tri.png' },
-    { name: 'by.U', logo: '/providers/byu.png' },
-    { name: 'AXIS', logo: '/providers/axis.png' },
-    { name: 'XL Axiata', logo: '/providers/xlaxiata.png' },
-];
+import { getProviders } from '../services/api'; // gunakan helper function
 
 const ProviderList = () => {
+    const [providers, setProviders] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getProviders(); // gunakan helper
+                setProviders(response.data);
+            } catch (error) {
+                console.error('Gagal mengambil data providers:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <Box sx={{ px: 4, py: 6, bgcolor: '#ffffff' }}>
             <Typography variant="h6" fontWeight="bold" mb={1}>
@@ -22,8 +28,8 @@ const ProviderList = () => {
             </Typography>
 
             <Grid container spacing={3}>
-                {providers.map((provider, idx) => (
-                    <Grid item key={provider.name}>
+                {providers.map((provider) => (
+                    <Grid item key={provider.id}>
                         <Paper
                             elevation={1}
                             sx={{
