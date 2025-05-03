@@ -5,7 +5,7 @@
             "name": "Paket Super Seru 25 GB",
             "provider": "Telkomsel",
             "quota": "Kuota 25 GB",
-            "price": "Rp 24.000.000",
+            "price": "Rp 50.000",
             "expiration": "28 Hari"
         },
         {
@@ -13,7 +13,7 @@
             "name": "Paket Xtra Combo Flex M",
             "provider": "XL Axiata",
             "quota": "Kuota 25 GB",
-            "price": "Rp 24.000.000",
+            "price": "Rp 45.000",
             "expiration": "28 Hari"
         },
         {
@@ -21,7 +21,15 @@
             "name": "Paket Super Seru 50 GB",
             "provider": "Telkomsel",
             "quota": "Kuota 50 GB",
-            "price": "Rp 24.000.000",
+            "price": "Rp 75.000",
+            "expiration": "28 Hari"
+        },
+        {
+            "id": 4,
+            "name": "Paket Kaget",
+            "provider": "by.U",
+            "quota": "Kuota 20 GB",
+            "price": "Rp 40.000",
             "expiration": "28 Hari"
         }
     ],
