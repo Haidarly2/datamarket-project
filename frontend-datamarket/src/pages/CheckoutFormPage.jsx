@@ -17,7 +17,7 @@ import {
 import NavbarTransaction from "../components/NavbarTransaction";
 import { useCheckout } from "../context/CheckoutContext";
 import { useNavigate } from "react-router-dom";
-import { getAddOns } from "../services/api"; // import getAddOns
+import { getAddOns } from "../services/api";
 
 const CheckoutFormPage = () => {
     const {
@@ -29,31 +29,28 @@ const CheckoutFormPage = () => {
         setMainPackage,
     } = useCheckout();
 
-    const [addOns, setAddOns] = useState([]); // state untuk menyimpan data add-ons
+    const [addOns, setAddOns] = useState([]);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
+        setPhoneNumber("");
+        setSelectedAddOns([]);
         if (!mainPackage) {
             const stored = localStorage.getItem('mainPackage');
             if (stored) {
                 setMainPackage(JSON.parse(stored));
             }
         }
-
-        setPhoneNumber("");         // reset nomor hp
-        setSelectedAddOns([]);      // reset add-ons
-
         const fetchAddOns = async () => {
             try {
-                const response = await getAddOns(); // panggil API untuk mendapatkan add-ons
-                setAddOns(response.data); // set data add-ons dari API
+                const response = await getAddOns();
+                setAddOns(response.data);
             } catch (error) {
                 console.error('Gagal mengambil data add-ons:', error);
             }
         };
-
-        fetchAddOns(); // panggil fungsi untuk mengambil add-ons
+        fetchAddOns();
     }, [setPhoneNumber, setSelectedAddOns, mainPackage, setMainPackage]);
 
     const handleToggleAddOn = (item) => {
@@ -84,13 +81,11 @@ const CheckoutFormPage = () => {
     return (
         <Box bgcolor={"#EFF3FA"} minHeight="100vh" width="100%">
             <Box sx={{ p: 2, maxWidth: "fit-content", mx: "auto" }}>
-                {/* Header */}
                 <NavbarTransaction
                     title="Pembelian Paket"
                     onBack={handleExitCheckout}
                 />
 
-                {/* Paket Title */}
                 <Box textAlign="center" mb={3}>
                     <Typography variant="h5" fontWeight="bold">
                         {mainPackage?.name || "Nama Paket"}
@@ -117,7 +112,6 @@ const CheckoutFormPage = () => {
                     </Stack>
                 </Box>
 
-                {/* Nomor HP */}
                 <Card
                     sx={{
                         p: 2,
@@ -146,7 +140,6 @@ const CheckoutFormPage = () => {
                     />
                 </Card>
 
-                {/* Add-ons */}
                 <Box mb={5}>
                     <Typography fontWeight={500} mb={2}>
                         Add-ons (Optional)
@@ -187,7 +180,6 @@ const CheckoutFormPage = () => {
                     </Box>
                 </Box>
 
-                {/* Button Lanjutkan */}
                 <Button
                     variant="contained"
                     color="primary"

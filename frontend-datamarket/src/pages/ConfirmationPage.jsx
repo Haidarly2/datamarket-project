@@ -7,8 +7,8 @@ import {
 } from '@mui/material';
 import NavbarTransaction from "../components/NavbarTransaction";
 import { useNavigate } from 'react-router-dom';
-import { useCheckout } from '../context/CheckoutContext'; // Pastikan path ini sesuai
-import { usePayment } from '../context/PaymentContext';   // Pastikan path ini sesuai
+import { useCheckout } from '../context/CheckoutContext';
+import { usePayment } from '../context/PaymentContext';
 
 const ConfirmationPage = () => {
     const navigate = useNavigate();
@@ -47,7 +47,6 @@ const ConfirmationPage = () => {
                     </Typography>
                     <Divider sx={{ mb: 2 }} />
 
-                    {/* Paket Utama */}
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                         <Typography>{mainPackage?.name || '-'}</Typography>
                         <Typography fontWeight={500}>
@@ -55,7 +54,6 @@ const ConfirmationPage = () => {
                         </Typography>
                     </Box>
 
-                    {/* Add-ons */}
                     {selectedAddOns.length > 0 && (
                         <>
                             <Typography sx={{ mt: 2 }}>Add-ons</Typography>
@@ -70,14 +68,12 @@ const ConfirmationPage = () => {
                         </>
                     )}
 
-                    {/* Metode Bayar */}
                     <Typography sx={{ mt: 3 }}>Metode Bayar</Typography>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                         <Typography fontWeight={600}>{selectedMethod || '-'}</Typography>
                         <Typography>{paymentPhoneNumber || '-'}</Typography>
                     </Box>
 
-                    {/* Total */}
                     <Divider sx={{ mt: 2, mb: 1 }} />
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
                         <Typography fontWeight={600}>Total</Typography>

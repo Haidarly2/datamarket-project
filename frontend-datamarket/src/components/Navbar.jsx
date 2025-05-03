@@ -23,15 +23,12 @@ const Navbar = () => {
                     justifyContent: 'space-between',
                 }}
             >
-                {/* Logo */}
                 <Box display="flex" alignItems="center" gap={1}>
                     <img src="/logo-datamart.png" alt="DataMart" height={28} />
                     <Typography variant="h6" fontWeight="bold" color="white">
                         DataMart
                     </Typography>
                 </Box>
-
-                {/* Search Input */}
                 <Paper
                     component="form"
                     sx={{
@@ -55,7 +52,6 @@ const Navbar = () => {
                     </IconButton>
                 </Paper>
 
-                {/* Icon & Masuk Button */}
                 <Box display="flex" alignItems="center" gap={2}>
                     <IconButton
                         sx={{

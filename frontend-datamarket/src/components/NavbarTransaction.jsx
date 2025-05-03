@@ -38,7 +38,6 @@ const NavbarTransaction = ({ title = "Judul Halaman", onBack }) => {
                 mb: 3,
             }}
         >
-            {/* Kiri: Tombol Kembali */}
             <Box
                 sx={{ display: 'flex', alignItems: 'center', gap: 1, cursor: 'pointer' }}
                 onClick={onBack}
@@ -47,12 +46,10 @@ const NavbarTransaction = ({ title = "Judul Halaman", onBack }) => {
                 <Typography fontWeight="500">Kembali</Typography>
             </Box>
 
-            {/* Tengah: Judul */}
             <Typography fontWeight="600" fontSize="16px">
                 {title}
             </Typography>
 
-            {/* Kanan: Icon & Avatar */}
             <Box display="flex" alignItems="center" gap={2}>
                 <IconButton
                     sx={{
@@ -66,7 +63,6 @@ const NavbarTransaction = ({ title = "Judul Halaman", onBack }) => {
                     <MessageQuestion size="20" color="#000" />
                 </IconButton>
 
-                {/* Avatar with Dropdown */}
                 <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
                     <Avatar src="/avatar.png" alt="Profile" />
                 </IconButton>

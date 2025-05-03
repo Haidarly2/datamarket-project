@@ -32,7 +32,6 @@ const LoginPage = () => {
         if (email === 'admin@datamart.com' && password === '123456') {
             localStorage.setItem('isLoggedIn', 'true');
 
-            // Ambil data paket jika ada
             const storedPackage = localStorage.getItem('selectedPackage');
             if (storedPackage) {
                 setMainPackage(JSON.parse(storedPackage));
@@ -68,10 +67,6 @@ const LoginPage = () => {
                     textAlign: 'center',
                 }}
             >
-                {/* Logo */}
-                {/* <Box mb={3}>
-                    <img src="/logo-datamart.png" alt="DataMart" width={100} />
-                </Box> */}
                 <Box display="flex" alignItems="center">
                     <img src="/logo-datamart.png" alt="DataMart" height={28} style={{ marginRight: 8 }} />
                     <Typography variant="h6" fontWeight="bold" color="white">
@@ -79,14 +74,10 @@ const LoginPage = () => {
                     </Typography>
                 </Box>
 
-
-
-                {/* Title */}
                 <Typography variant="h6" fontWeight="bold" textAlign="left" mb={2}>
                     Masuk
                 </Typography>
 
-                {/* Email Input */}
                 <TextField
                     fullWidth
                     placeholder="Masukkan email"
@@ -104,7 +95,6 @@ const LoginPage = () => {
                     }}
                 />
 
-                {/* Password Input */}
                 <TextField
                     fullWidth
                     placeholder="Masukkan password"
@@ -130,7 +120,6 @@ const LoginPage = () => {
                     }}
                 />
 
-                {/* Lupa Password */}
                 <Typography
                     variant="body2"
                     sx={{ textAlign: 'right', mt: 1, mb: 3, cursor: 'pointer' }}
@@ -138,7 +127,6 @@ const LoginPage = () => {
                     Lupa Password
                 </Typography>
 
-                {/* Login Button */}
                 <Button
                     fullWidth
                     variant="contained"
@@ -159,7 +147,6 @@ const LoginPage = () => {
                     Masuk
                 </Button>
 
-                {/* Register Button */}
                 <Button
                     fullWidth
                     variant="outlined"

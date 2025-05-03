@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Grid, Paper, Typography } from '@mui/material';
-import { getProviders } from '../services/api'; // gunakan helper function
+import { getProviders } from '../services/api'; 
 
 const ProviderList = () => {
     const [providers, setProviders] = useState([]);
@@ -8,7 +8,7 @@ const ProviderList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getProviders(); // gunakan helper
+                const response = await getProviders();
                 setProviders(response.data);
             } catch (error) {
                 console.error('Gagal mengambil data providers:', error);

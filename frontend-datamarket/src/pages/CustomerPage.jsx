@@ -10,7 +10,7 @@ const CustomerPage = () => {
     const { resetCheckout } = useCheckout();
 
     useEffect(() => {
-        resetCheckout(); // Reset checkout state when the component mounts
+        resetCheckout();
     }, []);
 
     return (

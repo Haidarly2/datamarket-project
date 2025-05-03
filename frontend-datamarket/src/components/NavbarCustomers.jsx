@@ -39,7 +39,6 @@ const NavbarCustomers = () => {
                     justifyContent: 'space-between',
                 }}
             >
-                {/* Logo */}
                 <Box display="flex" alignItems="center" gap={1}>
                     <img src="/logo-datamart.png" alt="DataMart" height={28} />
                     <Typography variant="h6" fontWeight="bold" color="white">
@@ -47,7 +46,6 @@ const NavbarCustomers = () => {
                     </Typography>
                 </Box>
 
-                {/* Search Input */}
                 <Paper
                     component="form"
                     sx={{
@@ -71,7 +69,6 @@ const NavbarCustomers = () => {
                     </IconButton>
                 </Paper>
 
-                {/* Icon & Avatar */}
                 <Box display="flex" alignItems="center" gap={2}>
                     <IconButton
                         sx={{
@@ -85,7 +82,6 @@ const NavbarCustomers = () => {
                         <MessageQuestion size="20" color="#000" />
                     </IconButton>
 
-                    {/* Avatar with Dropdown */}
                     <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
                         <Avatar src="/avatar.png" alt="Profile" />
                     </IconButton>

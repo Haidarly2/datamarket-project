@@ -11,7 +11,6 @@ const SuccessPage = () => {
     const { resetPayment } = usePayment();
 
     useEffect(() => {
-        // Reset semua data transaksi saat halaman success dimuat
         resetCheckout();
         resetPayment();
     }, []);
@@ -29,7 +28,6 @@ const SuccessPage = () => {
                 bgcolor: 'white',
             }}
         >
-            {/* Icon Ceklis */}
             <Box
                 sx={{
                     width: 180,
@@ -45,17 +43,14 @@ const SuccessPage = () => {
                 <TickCircle size="100" color="white" variant="Bold" />
             </Box>
 
-            {/* Judul */}
             <Typography variant="h6" fontWeight="bold" gutterBottom>
                 Pembayaran Berhasil
             </Typography>
 
-            {/* Subjudul */}
             <Typography sx={{ mb: 4 }}>
                 Paket Data Akan Segera Dikirimkan ke Nomor Anda
             </Typography>
 
-            {/* Tombol Kembali */}
             <Button
                 onClick={() => navigate('/customers')}
                 variant="contained"
