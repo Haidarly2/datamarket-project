@@ -2,6 +2,9 @@
 
 Ini adalah project frontend untuk DataMarket — sebuah aplikasi pembelian paket data menggunakan React, MUI, dan json-server sebagai mock API.
 
+## 🕛 Waktu Pengerjaan
+30 April 2025 19:00 -> 03 Mei 2025 12:00
+
 ## 🚀 Fitur Utama
 
 - Halaman login sederhana
@@ -32,6 +35,15 @@ frontend-datamarket/
 <br>├── mock-api/
 <br>│ └── db.json
 
+## GIF Fitur
+1. Fitur Login
+<img src="assets/1.gif">
+2. Fitur Lihat Paket Data
+<img src="assets/2.gif">
+3. Fitur Transaksi Paket Data
+<img src="assets/3.gif">
+4. Fitur Login (Memilih beli paket sebelum login)
+<img src="assets/4.gif">
 
 ## 📦 Instalasi & Menjalankan Aplikasi
 
