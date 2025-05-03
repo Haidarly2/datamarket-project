@@ -1,7 +1,21 @@
+import { useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import { TickCircle } from 'iconsax-reactjs'; // pastikan ini dari vuesax-react
+import { TickCircle } from 'iconsax-reactjs';
+import { useNavigate } from "react-router-dom";
+import { useCheckout } from '../context/CheckoutContext';
+import { usePayment } from '../context/PaymentContext';
 
-const SuccessPage = ({ onBack }) => {
+const SuccessPage = () => {
+    const navigate = useNavigate();
+    const { resetCheckout } = useCheckout();
+    const { resetPayment } = usePayment();
+
+    useEffect(() => {
+        // Reset semua data transaksi saat halaman success dimuat
+        resetCheckout();
+        resetPayment();
+    }, []);
+
     return (
         <Box
             sx={{
@@ -43,7 +57,7 @@ const SuccessPage = ({ onBack }) => {
 
             {/* Tombol Kembali */}
             <Button
-                onClick={onBack}
+                onClick={() => navigate('/customers')}
                 variant="contained"
                 sx={{
                     bgcolor: '#0B63E5',
