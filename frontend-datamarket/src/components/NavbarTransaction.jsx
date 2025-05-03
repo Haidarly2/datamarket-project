@@ -1,7 +1,29 @@
-import { ArrowLeft } from 'iconsax-reactjs';
-import { Box, Avatar, IconButton, Typography } from '@mui/material';
+import React, { useState } from "react";
+import { ArrowLeft, MessageQuestion } from 'iconsax-reactjs';
+import { Box, Avatar, IconButton, Typography, Menu, MenuItem } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const NavbarTransaction = ({ title = "Judul Halaman", onBack }) => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const navigate = useNavigate();
+    const { setIsLoggedIn } = useAuth();
+
+    const handleMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem('isLoggedIn');
+        navigate('/home');
+    };
+
     return (
         <Box
             sx={{
@@ -30,20 +52,40 @@ const NavbarTransaction = ({ title = "Judul Halaman", onBack }) => {
                 {title}
             </Typography>
 
-            {/* Kanan: Icon dan Avatar */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <IconButton sx={{ bgcolor: 'white', width: 36, height: 36 }}>
-                    <img
-                        src="/icon-transaksi.svg"
-                        alt="Icon"
-                        style={{ width: 20, height: 20 }}
-                    />
+            {/* Kanan: Icon & Avatar */}
+            <Box display="flex" alignItems="center" gap={2}>
+                <IconButton
+                    sx={{
+                        bgcolor: 'white',
+                        width: 36,
+                        height: 36,
+                        borderRadius: '50%',
+                        p: 0,
+                    }}
+                >
+                    <MessageQuestion size="20" color="#000" />
                 </IconButton>
-                <Avatar
-                    src="/avatar.jpg"
-                    alt="User"
-                    sx={{ width: 36, height: 36 }}
-                />
+
+                {/* Avatar with Dropdown */}
+                <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
+                    <Avatar src="/avatar.png" alt="Profile" />
+                </IconButton>
+                <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleMenuClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                >
+                    <MenuItem onClick={handleMenuClose}>Pengaturan</MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
             </Box>
         </Box>
     );
