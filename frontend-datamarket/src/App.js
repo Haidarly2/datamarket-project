@@ -8,24 +8,27 @@ import CheckoutFormPage from "./pages/CheckoutFormPage";
 import PaymentMethodPage from "./pages/PaymentmethodPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import SuccessPage from "./pages/SuccessPage";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/customers" element={<CustomerPage />} />
-        <Route path="/transactions" element={<TransactionPage />} />
-        <Route path="/checkout" element={<CheckoutFormPage />} />
-        <Route path="/payment" element={<PaymentMethodPage />} />
-        <Route path="/confirmation" element={<ConfirmationPage />} />
-        <Route path="/success" element={<SuccessPage />} />
-        {/* Add more routes as needed */}
-        {/* Catch-all route for 404 Not Found */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/customers" element={<CustomerPage />} />
+          <Route path="/transactions" element={<TransactionPage />} />
+          <Route path="/checkout" element={<CheckoutFormPage />} />
+          <Route path="/payment" element={<PaymentMethodPage />} />
+          <Route path="/confirmation" element={<ConfirmationPage />} />
+          <Route path="/success" element={<SuccessPage />} />
+          {/* Add more routes as needed */}
+          {/* Catch-all route for 404 Not Found */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
