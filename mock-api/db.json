@@ -41,31 +41,26 @@
         },
         {
             "id": 2,
-            "name": "Indosat Ooredoo",
-            "logo": "/providers/indosat.png"
-        },
-        {
-            "id": 3,
             "name": "Smartfren",
             "logo": "/providers/smartfren.png"
         },
         {
-            "id": 4,
+            "id": 3,
             "name": "Tri",
             "logo": "/providers/tri.png"
         },
         {
-            "id": 5,
+            "id": 4,
             "name": "by.U",
             "logo": "/providers/byu.png"
         },
         {
-            "id": 6,
+            "id": 5,
             "name": "AXIS",
             "logo": "/providers/axis.png"
         },
         {
-            "id": 7,
+            "id": 6,
             "name": "XL Axiata",
             "logo": "/providers/xlaxiata.png"
         }
