@@ -128,7 +128,18 @@ const CheckoutFormPage = () => {
                         placeholder="Nomor tujuan"
                         variant="outlined"
                         value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        onChange={(e) => {
+                            const input = e.target.value;
+                            if (/^[0-9]*$/.test(input) && input.length <= 13) {
+                                setPhoneNumber(input);
+                            }
+                        }}
+                        onPaste={(e) => {
+                            const pasteData = e.clipboardData.getData('text');
+                            if (!/^[0-9]*$/.test(pasteData)) {
+                                e.preventDefault();
+                            }
+                        }}
                         error={!!error}
                         helperText={error}
                         InputProps={{

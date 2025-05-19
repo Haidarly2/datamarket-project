@@ -46,17 +46,24 @@ const PaymentMethodPage = () => {
         fetchPaymentMethods();
     }, []);
 
+    const sanitizePhoneNumberInput = (value) => {
+        const onlyDigits = value.replace(/[^\d]/g, "");
+        return onlyDigits.slice(0, 13);
+    };
+
     const handleToggle = (index) => {
         setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
         setErrors({});
     };
 
     const handleInputChange = (method, value) => {
-        setInputValues((prev) => ({ ...prev, [method]: value }));
-        if (value.trim()) {
-            setErrors((prev) => ({ ...prev, [method]: '' }));
+        const sanitizedValue = sanitizePhoneNumberInput(value);
+        setInputValues((prev) => ({ ...prev, [method]: sanitizedValue }));
+        if (sanitizedValue.trim()) {
+            setInputErrors((prev) => ({ ...prev, [method]: '' }));
         }
     };
+
 
     const handleContinue = () => {
         const selected = paymentMethods[openIndex];
@@ -137,13 +144,7 @@ const PaymentMethodPage = () => {
                                             placeholder={`Masukkan nomor ${item.name}`}
                                             variant="outlined"
                                             value={inputValues[item.name] || ''}
-                                            onChange={(e) => {
-                                                handleInputChange(item.name, e.target.value);
-                                                setInputErrors((prev) => ({
-                                                    ...prev,
-                                                    [item.name]: '',
-                                                }));
-                                            }}
+                                            onChange={(e) => handleInputChange(item.name, e.target.value)}
                                             error={!!inputErrors[item.name]}
                                             helperText={inputErrors[item.name]}
                                             InputProps={{
