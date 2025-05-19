@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button, InputBase, Paper, IconButton } from '@mui/material';
-import { SearchNormal1, MessageQuestion } from 'iconsax-reactjs';
+import { SearchNormal1, Notification } from 'iconsax-reactjs';
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -62,7 +62,7 @@ const Navbar = () => {
                             p: 0,
                         }}
                     >
-                        <MessageQuestion size="20" color="#000" />
+                        <Notification size="20" color="#000" />
                     </IconButton>
                     <Button
                         variant="contained"

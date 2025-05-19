@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowLeft, MessageQuestion } from 'iconsax-reactjs';
+import { ArrowLeft, Notification } from 'iconsax-reactjs';
 import { Box, Avatar, IconButton, Typography, Menu, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -60,7 +60,7 @@ const NavbarTransaction = ({ title = "Judul Halaman", onBack }) => {
                         p: 0,
                     }}
                 >
-                    <MessageQuestion size="20" color="#000" />
+                    <Notification size="20" color="#000" />
                 </IconButton>
 
                 <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
