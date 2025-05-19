@@ -112,8 +112,13 @@ const LoginPage = () => {
                         endAdornment: (
                             <InputAdornment position="end">
                                 <IconButton onClick={togglePassword} edge="end">
-                                    {showPassword ? <EyeSlash size="20" /> : <Eye size="20" />}
+                                    {showPassword ? (
+                                        <EyeSlash key="eye-slash" size="20" variant='Linear' />
+                                    ) : (
+                                        <Eye key="eye" size="20" />
+                                    )}
                                 </IconButton>
+
                             </InputAdornment>
                         ),
                         sx: { borderRadius: '999px', bgcolor: 'white' },
